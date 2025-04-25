@@ -1,15 +1,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import {logMsg} from '../utils.js';
+import {logMsg, getPathData} from '../utils.js';
 
 const fileName = 'fresh.txt';
 const dirName = 'files';
 const content = 'I am fresh and young';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-    
+const {__dirname} = getPathData(import.meta.url);
 
 const create = async () => {
   logMsg('Starting work create.js');
