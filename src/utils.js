@@ -1,14 +1,18 @@
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+const supportsColor = process.stdout.isTTY && process.env.TERM !== 'dumb';
+
 const colors = {
-  green: '\x1b[32m',
-  red: '\x1b[31m',
-  reset: '\x1b[0m'
+  green: supportsColor ? '\x1b[32m' : '',
+  violet: supportsColor ? '\x1b[35m' : '',
+  red: supportsColor ? '\x1b[31m' : '',
+  reset: supportsColor ? '\x1b[0m' : '',
 };
 
 const colorMap = {
   info: colors.green,
+  important: colors.violet,
   error: colors.red,
 };
 
