@@ -13,7 +13,12 @@ const colorMap = {
 };
 
 export function logMsg(msg, type = 'info') {
-  console.log(`${colorMap[type]}${msg}${colors.reset}`);
+  const message = `${colorMap[type]}${msg}${colors.reset}`;
+  if (type === 'error') {
+    throw new Error(message);
+  } else {
+    console.log(message);
+  }
 }
 
 export function getPathData(meta) {
