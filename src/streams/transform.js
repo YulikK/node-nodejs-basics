@@ -4,7 +4,7 @@ import { pipeline } from 'node:stream/promises';
 import { logMsg } from '../utils.js';
 
 const reverseTransform = new Transform({
-  transform(chunk, encoding, callback) {
+  transform(chunk, _, callback) {
     const reversed =
       chunk.toString().trim().split('').reverse().join('') + '\n';
     callback(null, reversed);
