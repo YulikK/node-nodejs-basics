@@ -15,13 +15,15 @@ const random = Math.random();
 let unknownObject;
 
 if (random > 0.5) {
-  unknownObject = JSON.parse(
-    await fs.readFile(path.join(__dirname, dirName, 'a.json'))
-  );
+  const { default: jsonData } = await import('./files/a.json', {
+    with: { type: 'json' },
+  });
+  unknownObject = jsonData;
 } else {
-  unknownObject = JSON.parse(
-    await fs.readFile(path.join(__dirname, dirName, 'b.json'))
-  );
+  const { default: jsonData } = await import('./files/b.json', {
+    with: { type: 'json' },
+  });
+  unknownObject = jsonData;
 }
 
 console.log(`Release ${release()}`);
