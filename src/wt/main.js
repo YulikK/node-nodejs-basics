@@ -1,5 +1,44 @@
+import { Worker } from 'node:worker_threads';
+import { cpus } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'url';
+import { logMsg } from '../utils.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const workerPath = path.join(__dirname, 'worker.js');
+const countStart = 10;
+const workers = [];
+const numCPUs = cpus().length;
+
 const performCalculations = async () => {
-    // Write your code here
+  logMsg('Starting work main.js');
+
+  for (let i = 0; i < numCPUs; i++) {
+    workers.push(fibonacciWorkerService(i));
+  }
+
+  const result = await Promise.all(workers);
+
+  console.log(result);
+
+  logMsg('Ending work main.js');
 };
+
+function fibonacciWorkerService(index) {
+  return new Promise((resolve) => {
+    const count = countStart + index;
+    const worker = new Worker(workerPath, { workerData: count });
+    worker.on('message', (data) => {
+      resolve({
+        status: 'resolved',
+        data,
+      });
+    });
+    worker.on('error', () => {
+      resolve({ status: 'error', data: null });
+    });
+  });
+}
 
 await performCalculations();
