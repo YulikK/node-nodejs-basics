@@ -9,18 +9,20 @@ import { dirname } from 'path';
 const dirName = 'files';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const fileA = path.join(__dirname, dirName, 'a.json');
+const fileB = path.join(__dirname, dirName, 'b.json');
 
 const random = Math.random();
 
 let unknownObject;
 
 if (random > 0.5) {
-  const { default: jsonData } = await import('./files/a.json', {
+  const { default: jsonData } = await import(fileA, {
     with: { type: 'json' },
   });
   unknownObject = jsonData;
 } else {
-  const { default: jsonData } = await import('./files/b.json', {
+  const { default: jsonData } = await import(fileB, {
     with: { type: 'json' },
   });
   unknownObject = jsonData;
