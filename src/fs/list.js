@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { logMsg, getPathData } from '../utils.js';
+import os from 'node:os';
 
 const dirName = 'files';
 const errorMap = {
@@ -15,7 +16,7 @@ const list = async () => {
 
   try {
     const files = await fs.readdir(dirPath);
-    logMsg(files.join('\n'), 'important');
+    logMsg(files.join(os.EOL), 'important');
     logMsg('Success: Files list printed');
   } catch (error) {
     const errorMessage = errorMap[error.code] || error.message;

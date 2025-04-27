@@ -1,4 +1,6 @@
 import { logMsg } from '../../utils.js';
+import os from 'node:os';
+
 const args = process.argv.slice(2);
 
 logMsg(`Total number of arguments is ${args.length}`, 'important');
@@ -10,7 +12,9 @@ const echoInput = (chunk) => {
     logMsg('Ending work cp.js');
     process.exit(0);
   }
-  process.stdout.write(`Received from master process: ${chunk.toString()}\n`);
+  process.stdout.write(
+    `Received from master process: ${chunk.toString()}${os.EOL}`
+  );
 };
 
 process.stdin.on('data', echoInput);

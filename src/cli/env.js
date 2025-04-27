@@ -1,4 +1,6 @@
 import { logMsg } from '../utils.js';
+import os from 'node:os';
+
 const parseEnv = () => {
   logMsg('Starting work env.js');
   const envVars = process.env;
@@ -12,7 +14,7 @@ const parseEnv = () => {
   if (rssVars.length === 0) {
     logMsg('No RSS variables found', 'important');
   } else {
-    logMsg(rssVars.join('\n'), 'important');
+    logMsg(rssVars.join(os.EOL), 'important');
   }
   logMsg('Ending work env.js');
 };

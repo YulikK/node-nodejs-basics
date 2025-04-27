@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { stdout } from 'node:process';
 import { pipeline } from 'node:stream/promises';
 import path from 'node:path';
+import os from 'node:os';
 import { logMsg, getPathData } from '../utils.js';
 
 const dirName = 'files';
@@ -13,7 +14,7 @@ const read = async () => {
   logMsg('Starting work read.js');
 
   const sourceStream = fs.createReadStream(filePath);
-  sourceStream.on('end', () => process.stdout.write('\n'));
+  sourceStream.on('end', () => process.stdout.write(os.EOL));
 
   await pipeline(sourceStream, stdout, { end: false });
 
