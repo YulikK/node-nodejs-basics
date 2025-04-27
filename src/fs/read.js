@@ -5,7 +5,9 @@ import { logMsg, getPathData } from '../utils.js';
 const encoding = 'utf8';
 const dirName = 'files';
 const fileName = 'fileToRead.txt';
-const errorMessage = 'FS operation failed';
+const errorMap = {
+  ENOENT: 'FS operation failed',
+};
 const { __dirname } = getPathData(import.meta.url);
 
 const read = async () => {
@@ -18,6 +20,7 @@ const read = async () => {
     logMsg(content, 'important');
     logMsg('Success: File content printed');
   } catch (error) {
+    const errorMessage = errorMap[error.code] || error.message;
     logMsg(`${errorMessage}. ${error}`, 'error');
   }
 };
