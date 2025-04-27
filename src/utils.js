@@ -1,7 +1,9 @@
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-const supportsColor = process.stdout.isTTY && process.env.TERM !== 'dumb';
+const USE_COLORS = true;
+const supportsColor =
+  process.stdout.isTTY && process.env.TERM !== 'dumb' && USE_COLORS;
 
 const colors = {
   green: supportsColor ? '\x1b[32m' : '',
