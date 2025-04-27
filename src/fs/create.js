@@ -1,19 +1,20 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {logMsg, getPathData} from '../utils.js';
+import { logMsg, getPathData } from '../utils.js';
 
 const fileName = 'fresh.txt';
 const dirName = 'files';
 const content = 'I am fresh and young';
-const errorMessage = 'FS operation failed';
-const {__dirname} = getPathData(import.meta.url);
+const errorMap = {
+  EEXIST: 'FS operation failed',
+};
+const { __dirname } = getPathData(import.meta.url);
 
 const create = async () => {
   logMsg('Starting work create.js');
 
   await checkDirectory();
   await checkFile();
-  
 };
 
 const checkDirectory = async () => {
@@ -25,16 +26,17 @@ const checkDirectory = async () => {
     await fs.mkdir(dirPath);
     logMsg(`The directory '${dirName}' was created`);
   }
-}
+};
 
 const checkFile = async () => {
   const filePath = path.join(__dirname, dirName, fileName);
   try {
     await fs.writeFile(filePath, content, { flag: 'wx' });
     logMsg(`Success: file ${fileName} created`);
-  } catch(error) {
+  } catch (error) {
+    const errorMessage = errorMap[error.code] || error.message;
     logMsg(`${errorMessage}. ${error}`, 'error');
   }
-}
+};
 
 await create();
