@@ -20,6 +20,8 @@ const remove = async () => {
     const errorMessage = errorMap[error.code] || error.message;
     logMsg(`${errorMessage}. ${error}`, 'error');
   }
+
+  logMsg('Ending work delete.js');
 };
 
 await remove();

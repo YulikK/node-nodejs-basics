@@ -23,6 +23,8 @@ const read = async () => {
     const errorMessage = errorMap[error.code] || error.message;
     logMsg(`${errorMessage}. ${error}`, 'error');
   }
+
+  logMsg('Ending work read.js');
 };
 
 await read();

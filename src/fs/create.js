@@ -15,6 +15,8 @@ const create = async () => {
 
   await checkDirectory();
   await checkFile();
+
+  logMsg('Ending work create.js');
 };
 
 const checkDirectory = async () => {

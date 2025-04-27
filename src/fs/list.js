@@ -21,6 +21,8 @@ const list = async () => {
     const errorMessage = errorMap[error.code] || error.message;
     logMsg(`${errorMessage}. ${error}`, 'error');
   }
+
+  logMsg('Ending work list.js');
 };
 
 await list();
