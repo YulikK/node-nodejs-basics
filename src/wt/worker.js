@@ -6,7 +6,7 @@ const nthFibonacci = (n) =>
 
 const sendResult = () => {
   try {
-    const result = nthFibonacci(workerData);
+    const result = nthFibonacci(Number(workerData));
     parentPort.postMessage({ status: 'resolved', data: result });
   } catch {
     parentPort.postMessage({ status: 'error', data: null });

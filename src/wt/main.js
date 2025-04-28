@@ -32,8 +32,8 @@ function fibonacciWorkerService(index) {
     worker.on('message', (data) => {
       resolve(data);
     });
-    worker.on('error', (data) => {
-      resolve(data);
+    worker.on('error', () => {
+      resolve({ status: 'error', data: null });
     });
   });
 }
