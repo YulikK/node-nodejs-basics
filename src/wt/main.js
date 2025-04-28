@@ -30,13 +30,10 @@ function fibonacciWorkerService(index) {
     const count = countStart + index;
     const worker = new Worker(workerPath, { workerData: count });
     worker.on('message', (data) => {
-      resolve({
-        status: 'resolved',
-        data,
-      });
+      resolve(data);
     });
-    worker.on('error', () => {
-      resolve({ status: 'error', data: null });
+    worker.on('error', (data) => {
+      resolve(data);
     });
   });
 }
